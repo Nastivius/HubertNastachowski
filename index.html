@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Portfolio architekta informacji: UX, IA, prototypy, animacje 3D, GSAP, Three.js" />
+    <meta name="keywords" content="architekt informacji, UX, portfolio, interakcje, wireframe, figma, gsap, neobrutalizm" />
+    <meta property="og:title" content="Portfolio Huberta Nastachowskiego" />
+    <meta property="og:image" content="/assets/og-image.jpg" />
+
+    <title>| IA Portfolio</title>
+
+    <script defer src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="style/style.css" />
+</head>
+
+<body class="bg-[#fdfdfd] text-black font-sans">
+
+<!-- === NAVIGATION === -->
+<header class="w-full fixed top-0 z-50 bg-white border-b-4 border-black shadow-[4px_4px_0_#000]">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <h1 class="text-xl font-black tracking-tight uppercase">IA Portfolio</h1>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex gap-8 font-medium text-sm">
+            <a href="#hero" class="hover:rotate-6 transition-transform">Start</a>
+            <a href="#about" class="hover:-rotate-6 transition-transform">O mnie</a>
+            <a href="#tools" class="hover:rotate-3 transition-transform">Narzędzia</a>
+            <a href="#volunteering" class="hover:-rotate-3 transition-transform">Wolontariat</a>
+            <a href="#manualofme" class="hover:rotate-2 transition-transform">Manual</a>
+            <a href="#gallery" class="hover:-rotate-2 transition-transform">Projekty</a>
+            <a href="#social" class="hover:rotate-6 transition-transform">Kontakt</a>
+        </nav>
+
+        <!-- Mobile Burger -->
+        <button id="burger" class="md:hidden text-xl">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <nav id="mobileMenu" class="hidden md:hidden bg-white border-t-4 border-black p-4 space-y-4">
+        <a href="#hero" class="block">Start</a>
+        <a href="#about" class="block">O mnie</a>
+        <a href="#tools" class="block">Narzędzia</a>
+        <a href="#volunteering" class="block">Wolontariat</a>
+        <a href="#manualofme" class="block">Manual</a>
+        <a href="#gallery" class="block">Projekty</a>
+        <a href="#social" class="block">Kontakt</a>
+    </nav>
+</header>
+
+<script>
+    // Burger toggle
+    document.addEventListener('DOMContentLoaded', () => {
+        const burger = document.getElementById('burger');
+        const menu = document.getElementById('mobileMenu');
+        burger.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    });
+</script>
+
+<!-- === HERO === -->
+<section id="hero" class="min-h-screen flex items-center justify-center px-6 relative overflow-hidden pt-32">
+    <!-- Tła neony -->
+    <div class="absolute inset-0 z-0 pointer-events-none">
+        <div class="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-pink-500 opacity-20 blur-xl animate-pulse"></div>
+        <div class="absolute bottom-1/3 right-1/3 w-40 h-40 rounded-full bg-blue-500 opacity-20 blur-xl"></div>
+        <div class="absolute top-2/3 right-1/4 w-24 h-24 rounded-full bg-green-500 opacity-20 blur-xl"></div>
+    </div>
+
+    <!-- Zawartość -->
+    <div class="container mx-auto relative z-10">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-12">
+            <!-- Tekst -->
+            <div class="md:w-1/2">
+                <h1 class="text-5xl md:text-6xl font-black mb-6 leading-tight">
+                    <span class="inline-block transform hover:-rotate-3 transition-transform">Moje</span>
+                    <span class="inline-block text-blue-500 transform hover:rotate-3 transition-transform">Interaktywne</span><br />
+                    <span class="inline-block transform hover:-rotate-3 transition-transform">Cyfrowe</span>
+                    <span class="inline-block transform hover:rotate-3 transition-transform">Portfolio</span>
+                </h1>
+                <p class="text-xl mb-8 max-w-md">
+                    To portfolio łączy architekturę informacji z projektowaniem przestrzennym, tworząc wielowymiarowe doświadczenie cyfrowe.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#about" class="px-6 py-3 bg-blue-500 text-white rounded-full font-semibold shadow-[4px_4px_0_#000] hover:bg-pink-400 transition hover:-translate-y-1">
+                        Kim jestem? <i class="fas fa-arrow-down ml-2"></i>
+                    </a>
+                    <a href="#social" class="px-6 py-3 border-2 border-blue-500 text-blue-500 rounded-full font-semibold shadow-[4px_4px_0_#000] hover:bg-blue-50 transition hover:-translate-y-1">
+                        Moje media <i class="fas fa-random ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sześcian -->
+            <div class="md:w-1/3 relative" id="cube-container">
+                <div id="cube" class="w-48 h-48 mx-auto [transform-style:preserve-3d] transition-transform duration-300">
+                    <!-- Ściany sześcianu -->
+                    <div class="cube-face front">IA</div>
+                    <div class="cube-face back">UX</div>
+                    <div class="cube-face right">Design</div>
+                    <div class="cube-face left">Code</div>
+                    <div class="cube-face top">Research</div>
+                    <div class="cube-face bottom">Wireframes</div>
+                </div>
+                <p class="text-center mt-6 text-sm text-slate-500">Przeciągnij, by obracać sześcian</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Strzałka w dół -->
+    <div class="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce z-10">
+        <a href="#about" class="text-blue-500 text-2xl">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </div>
+</section>
+
+<style>
+    #cube {
+        transform: rotateX(15deg) rotateY(15deg);
+    }
+    .cube-face {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        border: 2px solid black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1rem;
+        box-shadow: 4px 4px 0 #000;
+    }
+    .front  { transform: translateZ(3rem); }
+    .back   { transform: rotateY(180deg) translateZ(3rem); }
+    .right  { transform: rotateY(90deg) translateZ(3rem); }
+    .left   { transform: rotateY(-90deg) translateZ(3rem); }
+    .top    { transform: rotateX(90deg) translateZ(3rem); }
+    .bottom { transform: rotateX(-90deg) translateZ(3rem); }
+</style>
+
+<script>
+    const cube = document.getElementById('cube');
+    let isDragging = false;
+    let previousMousePosition = { x: 0, y: 0 };
+    let rotation = { x: 15, y: 15 };
+
+    cube.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        previousMousePosition = { x: e.clientX, y: e.clientY };
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const dx = e.clientX - previousMousePosition.x;
+        const dy = e.clientY - previousMousePosition.y;
+        rotation.y += dx * 0.5;
+        rotation.x -= dy * 0.5;
+        cube.style.transform = `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`;
+        previousMousePosition = { x: e.clientX, y: e.clientY };
+    });
+
+    document.addEventListener('mouseup', () => isDragging = false);
+</script>
+<section id="about" class="py-24 px-6 bg-white border-t-4 border-black shadow-inner">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
+
+        <!-- Zdjęcie -->
+        <div class="md:w-1/3 relative">
+            <div class="shadow-[8px_8px_0_#000] border-2 border-black rounded-lg overflow-hidden bg-concrete
+              transition-transform duration-300 hover:-translate-y-2 hover:shadow-[12px_12px_0_#000]">
+                <img
+                        src="photo.jpeg"
+                        alt="Zdjęcie"
+                        class="w-full h-auto"
+                />
+            </div>
+            <div class="absolute -bottom-6 -right-6 w-20 h-20 bg-blue-500 opacity-30 rounded-full -z-10 blur-xl"></div>
+        </div>
+
+
+        <!-- Tekst -->
+        <div class="md:w-2/3">
+            <h2 class="text-4xl md:text-5xl font-black mb-8 hover:-rotate-6 transition-transform inline-block">
+                <span class="text-blue-600">//</span> O mnie
+            </h2>
+            <p class="text-lg mb-6 leading-relaxed">
+                Jestem <strong>25-letnim architektem informacji</strong>, który łączy architekturę, nauki kognitywne i projektowanie interakcji.
+                Wierzę, że przestrzenie cyfrowe powinny być tak samo logiczne i intuicyjne jak architektura fizyczna — z wyraźną strukturą, punktami orientacyjnymi i porządkiem.
+            </p>
+            <p class="text-lg mb-6 leading-relaxed">
+                Na co dzień eksploruję narzędzia cyfrowe, projektuję doświadczenia użytkownika i doskonalę się w <strong>prompt engineeringu</strong>.
+                Prywatnie pochłaniam książki i obserwuję ewolucję technologii.
+            </p>
+
+            <!-- Wykształcenie i doświadczenie -->
+            <!-- Kontener boxów -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Edukacja -->
+                <div class="bg-[#fdfdfd] border-2 border-black p-6 rounded-xl shadow-[6px_6px_0_#000]
+              transform transition duration-300 hover:bg-blue-100 hover:scale-[1.03] hover:shadow-[8px_8px_0_#000]">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-graduation-cap text-blue-600 mr-3"></i> Wykształcenie
+                    </h3>
+                    <ul class="space-y-3 text-sm">
+                        <li>🎓 <strong>Magister AI</strong> — UMK (2024 – obecnie)</li>
+                        <li>🎓 <strong>Licencjat AI</strong> — UMK (2021 – 2024)</li>
+                        <li>🖥️ <strong>Technik Informatyki</strong> — ZS1 w Sierpcu (2018 – 2021)</li>
+                    </ul>
+                </div>
+
+                <!-- Doświadczenie -->
+                <div class="bg-[#fdfdfd] border-2 border-black p-6 rounded-xl shadow-[6px_6px_0_#000]
+              transform transition duration-300 hover:bg-blue-100 hover:scale-[1.03] hover:shadow-[8px_8px_0_#000]">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-briefcase text-pink-500 mr-3"></i> Doświadczenie
+                    </h3>
+                    <ul class="space-y-3 text-sm">
+                        <li>🧪 <strong>Tester oprogramowania</strong> — UMK (2021)</li>
+                        <li>🎙️ <strong>Instruktor warsztatów</strong> — UMK (2025)</li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+<section id="tools" class="py-24 px-6 bg-[#fdfdfd] border-t-4 border-black">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-black mb-16 text-center hover:rotate-6 transition-transform">
+            <span class="text-pink-500">#</span> Design Toolkit
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <!-- RESEARCH -->
+            <div class="bg-white border-2 border-black p-6 rounded-xl shadow-[6px_6px_0_#000] transform transition-all duration-300 hover:scale-[1.03] hover:bg-pink-50 hover:shadow-[8px_8px_0_#000]">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-search text-blue-600 mr-3"></i> Research
+                </h3>
+                <ul class="space-y-4 text-sm">
+                    <li>🔍 User Interviews – <strong>90%</strong></li>
+                    <li>🗂️ Card Sorting – <strong>85%</strong></li>
+                    <li>🌳 Tree Testing – <strong>80%</strong></li>
+                    <li>👥 Persony – <strong>80%</strong></li>
+                </ul>
+            </div>
+
+            <!-- APLIKACJE -->
+            <div class="bg-white border-2 border-black p-6 rounded-xl shadow-[6px_6px_0_#000] transform transition-all duration-300 hover:scale-[1.03] hover:bg-pink-50 hover:shadow-[8px_8px_0_#000]">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-pencil-ruler text-pink-500 mr-3"></i> Aplikacje
+                </h3>
+                <div class="grid grid-cols-2 gap-4 text-center text-sm">
+                    <div class="tool-card border-2 border-black p-4 rounded-lg shadow-md transform transition duration-300 hover:scale-105 hover:border-pink-500 hover:shadow-[4px_4px_0_#000]">
+                        <i class="fab fa-figma text-3xl text-blue-600 mb-1"></i>
+                        <div>Figma<br><span class="text-slate-500 text-xs">Zaawansowany</span></div>
+                    </div>
+                    <div class="tool-card border-2 border-black p-4 rounded-lg shadow-md transform transition duration-300 hover:scale-105 hover:border-pink-500 hover:shadow-[4px_4px_0_#000]">
+                        <i class="fas fa-cube text-3xl text-green-500 mb-1"></i>
+                        <div>Penpot<br><span class="text-slate-500 text-xs">Zaawansowany</span></div>
+                    </div>
+                    <div class="tool-card border-2 border-black p-4 rounded-lg shadow-md transform transition duration-300 hover:scale-105 hover:border-pink-500 hover:shadow-[4px_4px_0_#000]">
+                        <i class="fab fa-adobe text-3xl text-red-500 mb-1"></i>
+                        <div>Lunacy<br><span class="text-slate-500 text-xs">Zaawansowany</span></div>
+                    </div>
+                    <div class="tool-card border-2 border-black p-4 rounded-lg shadow-md transform transition duration-300 hover:scale-105 hover:border-pink-500 hover:shadow-[4px_4px_0_#000]">
+                        <i class="fas fa-vector-square text-3xl text-purple-500 mb-1"></i>
+                        <div>Canva<br><span class="text-slate-500 text-xs">Podstawowy</span></div>
+                    </div>
+                    <!-- Tu możesz później wstawić własne ikony dla Kardsort, Trello, ClickUp -->
+                </div>
+            </div>
+
+            <!-- TECHNOLOGIE -->
+            <div class="bg-white border-2 border-black p-6 rounded-xl shadow-[6px_6px_0_#000] transform transition-all duration-300 hover:scale-[1.03] hover:bg-pink-50 hover:shadow-[8px_8px_0_#000]">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-code text-green-600 mr-3"></i> Technologie, które znam
+                </h3>
+                <div class="grid grid-cols-2 gap-4 text-center text-sm">
+                    <div class="tool-card border-2 border-black p-4 rounded-lg shadow-md transform transition duration-300 hover:scale-105 hover:border-pink-500 hover:shadow-[4px_4px_0_#000]">
+                        <i class="fab fa-html5 text-3xl text-orange-500 mb-1"></i>
+                        <div>HTML/CSS<br><span class="text-slate-500 text-xs">Zaawansowany</span></div>
+                    </div>
+                    <div class="tool-card border-2 border-black p-4 rounded-lg shadow-md transform transition duration-300 hover:scale-105 hover:border-pink-500 hover:shadow-[4px_4px_0_#000]">
+                        <i class="fab fa-js text-3xl text-yellow-400 mb-1"></i>
+                        <div>JavaScript<br><span class="text-slate-500 text-xs">Średniozaaw.</span></div>
+                    </div>
+                    <div class="tool-card border-2 border-black p-4 rounded-lg shadow-md transform transition duration-300 hover:scale-105 hover:border-pink-500 hover:shadow-[4px_4px_0_#000]">
+                        <i class="fab fa-react text-3xl text-blue-400 mb-1"></i>
+                        <div>React<br><span class="text-slate-500 text-xs">Podstawowy</span></div>
+                    </div>
+                    <div class="tool-card border-2 border-black p-4 rounded-lg shadow-md transform transition duration-300 hover:scale-105 hover:border-pink-500 hover:shadow-[4px_4px_0_#000]">
+                        <i class="fas fa-cube text-3xl text-indigo-500 mb-1"></i>
+                        <div>Three.js<br><span class="text-slate-500 text-xs">Średniozaaw.</span></div>
+                    </div>
+                    <div class="tool-card border-2 border-black p-4 rounded-lg shadow-md transform transition duration-300 hover:scale-105 hover:border-pink-500 hover:shadow-[4px_4px_0_#000]">
+                        <i class="fas fa-terminal text-3xl text-black mb-1"></i>
+                        <div>Prompt Engineering<br><span class="text-slate-500 text-xs">Zaawansowany</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="volunteering" class="py-24 px-6 bg-white border-t-4 border-black">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-black text-center mb-4 hover:rotate-6 transition-transform">
+            <span class="text-green-600">+</span> Wolontariat
+        </h2>
+        <p class="text-xl text-center mb-16 max-w-3xl mx-auto">
+            Aktywnie angażuję się w działania uniwersyteckie, badawcze i społeczne w ramach studiów i projektów zewnętrznych.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Projekt 1 -->
+            <div class="bg-white border-2 border-black p-6 rounded-xl shadow-[6px_6px_0_#000] transform transition-all duration-300 hover:scale-[1.03] hover:bg-pink-50 hover:shadow-[8px_8px_0_#000]">
+                <div class="flex items-start mb-4">
+                    <div class="bg-pink-100 p-3 rounded-lg mr-4">
+                        <i class="fas fa-hands-helping text-pink-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold">Zgłoś Trolla</h3>
+                        <p class="text-sm text-slate-500">Brand24/UMK • 2022–2023</p>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-700">
+                    Weryfikowałem zgłoszenia treści dezinformacyjnych przy użyciu fact-checkingu i narzędzi OSINT.
+                </p>
+            </div>
+
+            <!-- Projekt 2 -->
+            <div class="bg-white border-2 border-black p-6 rounded-xl shadow-[6px_6px_0_#000] transform transition-all duration-300 hover:scale-[1.03] hover:bg-pink-50 hover:shadow-[8px_8px_0_#000]">
+                <div class="flex items-start mb-4">
+                    <div class="bg-blue-100 p-3 rounded-lg mr-4">
+                        <i class="fas fa-chalkboard-teacher text-blue-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold">Tester aplikacji</h3>
+                        <p class="text-sm text-slate-500">UMK • 2021</p>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-700">
+                    Testowałem funkcje aplikacji „Gra o dyplom” — raportując błędy i poprawiając UX prototypu.
+                </p>
+            </div>
+
+            <!-- Projekt 3 -->
+            <div class="bg-white border-2 border-black p-6 rounded-xl shadow-[6px_6px_0_#000] transform transition-all duration-300 hover:scale-[1.03] hover:bg-pink-50 hover:shadow-[8px_8px_0_#000]">
+                <div class="flex items-start mb-4">
+                    <div class="bg-green-100 p-3 rounded-lg mr-4">
+                        <i class="fas fa-globe-europe text-green-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold">SKNAI – działania</h3>
+                        <p class="text-sm text-slate-500">2021 – obecnie</p>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-700">
+                    Brałem udział w promocji kierunku, audytach stron (Yufe), podcastach oraz kampaniach informacyjnych.
+                </p>
+            </div>
+
+            <!-- Projekt 4 -->
+            <div class="bg-white border-2 border-black p-6 rounded-xl shadow-[6px_6px_0_#000] transform transition-all duration-300 hover:scale-[1.03] hover:bg-pink-50 hover:shadow-[8px_8px_0_#000]">
+                <div class="flex items-start mb-4">
+                    <div class="bg-purple-100 p-3 rounded-lg mr-4">
+                        <i class="fas fa-university text-purple-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold">Audytor</h3>
+                        <p class="text-sm text-slate-500">Poradnia Tworzenia Stron • 2023 – obecnie</p>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-700">
+                    Przeprowadzam audyty stron www pod kątem użyteczności, struktury informacji i dostępności cyfrowej.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="case-study" class="py-24 px-6 bg-[#fdfdfd] border-t-4 border-black">
+    <div class="max-w-5xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-black text-center mb-4 hover:-rotate-6 transition-transform">
+            <span class="text-purple-600">★</span> Case Study
+        </h2>
+        <p class="text-xl text-center mb-16 max-w-2xl mx-auto">
+            Jak wygląda mój proces rozwiązywania problemów? Zobacz na konkretnych przykładach.
+        </p>
+
+        <!-- STUDY 1 -->
+        <div class="bg-white border-2 border-black rounded-xl shadow-[6px_6px_0_#000] p-6 mb-12 hover:bg-purple-50 transition">
+            <h3 class="text-2xl font-bold mb-2">🎯 Projekt: Redesign strony JUVE</h3>
+            <p class="text-sm text-slate-600 mb-4">Zrealizowany w ramach zajęć z projektowania systemów informacyjnych</p>
+
+            <ul class="space-y-2 text-sm leading-relaxed">
+                <li><strong>Problem:</strong> Niska czytelność i nieintuicyjna nawigacja strony fundacji JUVE.</li>
+                <li><strong>Cel:</strong> Poprawić UX i architekturę informacji, zwiększyć dostępność.</li>
+                <li><strong>Proces:</strong> audyt heurystyczny → badania z użytkownikami → wireframe'y (Canva) → prototyp (Figma).</li>
+                <li><strong>Rezultat:</strong> Nowa struktura nawigacji, uproszczona mapa strony, wprowadzenie CTA i nowoczesnej typografii.</li>
+            </ul>
+
+            <div class="mt-6">
+                <img src="https://via.placeholder.com/800x400.png?text=Mockup+przed+i+po" alt="Mockup redesignu" class="rounded-md border-2 border-black" />
+            </div>
+        </div>
+
+        <!-- STUDY 2 -->
+        <div class="bg-white border-2 border-black rounded-xl shadow-[6px_6px_0_#000] p-6 mb-12 hover:bg-pink-50 transition">
+            <h3 class="text-2xl font-bold mb-2">📦 Projekt: AI Persona Builder</h3>
+            <p class="text-sm text-slate-600 mb-4">Własny projekt wykorzystujący prompt engineering + narzędzia low-code</p>
+
+            <ul class="space-y-2 text-sm leading-relaxed">
+                <li><strong>Problem:</strong> Trudność w tworzeniu trafnych person UX przez juniorów i klientów.</li>
+                <li><strong>Cel:</strong> Automatyzować proces tworzenia person na podstawie danych wejściowych (tekstowych lub z ankiet).</li>
+                <li><strong>Proces:</strong> prompt design → testy generatywne → makieta w Figmie → implementacja w Glide + Airtable.</li>
+                <li><strong>Rezultat:</strong> Narzędzie pozwala generować 3–5 realistycznych person na podstawie profilu projektu.</li>
+            </ul>
+
+            <div class="mt-6">
+                <img src="https://via.placeholder.com/800x400.png?text=Screen+narzędzia" alt="AI Persona Builder" class="rounded-md border-2 border-black" />
+            </div>
+        </div>
+
+        <!-- Struktura uczelni -->
+        <div class="bg-white border-2 border-black rounded-xl shadow-[6px_6px_0_#000] p-6 mb-12 hover:bg-pink-50 transition">
+            <h3 class="text-xl font-bold mb-2">🧭 Struktura dla strony uczelni</h3>
+            <p class="text-sm leading-relaxed text-slate-700">
+                Zaprojektowałem nową strukturę informacji dla strony wydziałowej UMK. Przeprowadziłem card sorting i tree testing z użytkownikami (studenci + pracownicy), a następnie zaproponowałem reorganizację menu oraz landingów informacyjnych.
+            </p>
+            <div class="mt-6">
+                <img src="https://via.placeholder.com/800x400.png?text=Screen+narzędzia" alt="AI Persona Builder" class="rounded-md border-2 border-black" />
+            </div>
+        </div>
+
+        <!-- Biblioteka cyfrowa -->
+        <div class="bg-white border-2 border-black p-6 rounded-xl shadow-[6px_6px_0_#000] mb-12 hover:bg-green-50 transition">
+            <h3 class="text-xl font-bold mb-2">📚 Audyt biblioteki cyfrowej</h3>
+            <p class="text-sm leading-relaxed text-slate-700">
+                Przeprowadziłem heurystyczny audyt dostępności i UX platformy z e-bookami. Oceniałem: dostępność dla osób niedowidzących, hierarchię wizualną oraz logikę filtrowania publikacji. Zaproponowałem zmiany w oznaczeniach i przepływie filtrowania.
+            </p>
+        </div>
+
+        <!-- Prompt Engineering -->
+        <div class="bg-white border-2 border-black p-6 rounded-xl shadow-[6px_6px_0_#000] mb-12 hover:bg-purple-50 transition">
+            <h3 class="text-xl font-bold mb-2">🤖 Prompt Engineering w edukacji</h3>
+            <p class="text-sm leading-relaxed text-slate-700">
+                Tworzyłem zestawy promptów wspierających studentów AI i kognitywistyki: narzędzia do generowania testów, wizualizacji informacji, person UX oraz planów UX research. Dzieliłem się nimi podczas warsztatów dla UMK i zdalnie przez Notion.
+            </p>
+        </div>
+
+        <!-- Mapowanie wiedzy -->
+        <div class="bg-white border-2 border-black p-6 rounded-xl shadow-[6px_6px_0_#000] mb-12 hover:bg-yellow-50 transition">
+            <h3 class="text-xl font-bold mb-2">🗂️ Mapowanie wiedzy</h3>
+            <p class="text-sm leading-relaxed text-slate-700">
+                Stworzyłem interaktywny knowledge graph prezentujący relacje między kluczowymi pojęciami UX/IA. Narzędzie wykorzystuje siatkę semantyczną i pozwala wizualnie eksplorować zależności. Wersja demo osadzona na stronie jako komponent Three.js.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- Alpine.js do prostych interakcji -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+<section id="manualofme" class="py-24 px-6 bg-[#fdfdfd] border-t-4 border-black">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-black text-center mb-16 hover:rotate-6 transition-transform">
+            <span class="text-blue-600">//</span> Manual of Me
+        </h2>
+
+        <div class="space-y-4" x-data="{ open: null }">
+            <!-- Accordion Block -->
+            <template x-for="(section, index) in [
+        { title: 'O mnie', icon: 'fa-graduation-cap', content: `Moje wartości:\n• Przejrzystość i logika\n• Współpraca i szacunek\n• Ciągły rozwój\n\nMocne strony:\n• Myślenie analityczne\n• Szybkie uczenie się\n• Kreatywność UX` },
+        { title: 'Styl komunikacji', icon: 'fa-comments', content: `• Preferuję Slacka\n• Komunikuję się konkretnie i z emotkami\n• Odpowiadam szybko (w godzinach pracy)` },
+        { title: 'Styl pracy', icon: 'fa-briefcase', content: `• Pracuję 9:00–16:00\n• Najlepszy czas: rano\n• Lubię skupić się na jednym zadaniu\n• Dobrze odnajduję się w pracy zdalnej` },
+        { title: 'Współpraca', icon: 'fa-handshake', content: `• Lubię jasne zadania i oczekiwania\n• Potrzebuję przestrzeni na przemyślenie problemów\n• Cenię bieżący feedback` },
+        { title: 'Spotkania', icon: 'fa-calendar-alt', content: `• Krótkie i konkretne\n• Lubię agendy i notatki\n• Rano > wieczorem` },
+        { title: 'Preferencje techniczne', icon: 'fa-sliders-h', content: `• Figma, Miro, Notion, Slack\n• Design Thinking\n• Przejrzyste repozytoria i dokumentacja` },
+        { title: 'Feedback', icon: 'fa-comment-dots', content: `• Preferuję bezpośredni, konstruktywny feedback\n• Lubię konkretne przykłady\n• Feedback najlepiej 1:1` },
+        { title: 'Nieporozumienia', icon: 'fa-exclamation-triangle', content: `• Bezpośredniość to nie stanowczość\n• Czasem milczę, gdy analizuję\n• Studium ≠ brak profesjonalizmu` }
+      ]" :key="index">
+                <div class="border-2 border-black rounded-lg shadow-[4px_4px_0_#000] bg-white">
+                    <button @click="open === index ? open = null : open = index"
+                            class="w-full px-6 py-4 flex items-center justify-between font-semibold text-left hover:bg-gray-100 transition">
+                        <div class="flex items-center gap-3">
+                            <i :class="'fas ' + section.icon"></i>
+                            <span x-text="section.title"></span>
+                        </div>
+                        <i :class="open === index ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
+                    </button>
+                    <div x-show="open === index"
+                         x-transition
+                         class="px-6 pb-6 text-sm whitespace-pre-wrap text-slate-700">
+                        <span x-text="section.content"></span>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+</section>
+
+<section id="gallery" class="py-24 px-6 bg-[#fdfdfd] border-t-4 border-black">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-black text-center mb-4 hover:rotate-6 transition-transform">
+            <span class="text-green-600">//</span> Project Gallery
+        </h2>
+        <p class="text-xl text-center mb-16 max-w-2xl mx-auto">
+            Wizualny przegląd projektów z zakresu architektury informacji, UX i przestrzeni cyfrowej.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Projekt 1 -->
+            <div class="bg-white border-2 border-black rounded-lg overflow-hidden shadow-[6px_6px_0_#000]">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80"
+                     alt="Data Topography" onclick="openModal(this.src)"
+                     class="w-full h-48 object-cover cursor-pointer transition-transform duration-300 ease-in-out group-hover:scale-105"/>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg">Data Topography</h3>
+                    <p class="text-sm text-slate-600">Interaktywna wizualizacja danych</p>
+                </div>
+            </div>
+
+            <!-- Projekt 2 -->
+            <div class="bg-white border-2 border-black rounded-lg overflow-hidden shadow-[6px_6px_0_#000]">
+                <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80"
+                     alt="Navigation Blueprint" onclick="openModal(this.src)"
+                     class="w-full h-48 object-cover cursor-pointer transition-transform duration-300 ease-in-out group-hover:scale-105" />
+                <div class="p-4">
+                    <h3 class="font-bold text-lg">Navigation Blueprint</h3>
+                    <p class="text-sm text-slate-600">Struktura informacji dla strony</p>
+                </div>
+            </div>
+
+            <!-- Projekt 3 -->
+            <div class="bg-white border-2 border-black rounded-lg overflow-hidden shadow-[6px_6px_0_#000]">
+                <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=800&q=80"
+                     alt="Urban Explorer" onclick="openModal(this.src)"
+                     class="w-full h-48 object-cover cursor-pointer transition-transform duration-300 ease-in-out group-hover:scale-105"/>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg">Urban Explorer</h3>
+                    <p class="text-sm text-slate-600">Aplikacja mobilna do nawigacji</p>
+                </div>
+            </div>
+
+            <!-- Projekt 4 -->
+            <div class="bg-white border-2 border-black rounded-lg overflow-hidden shadow-[6px_6px_0_#000]">
+                <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=800&q=80"
+                     alt="Digital Museum" onclick="openModal(this.src)"
+                     class="w-full h-48 object-cover cursor-pointer transition-transform duration-300 ease-in-out group-hover:scale-105" />
+                <div class="p-4">
+                    <h3 class="font-bold text-lg">Digital Museum</h3>
+                    <p class="text-sm text-slate-600">Interfejs przestrzenny 3D</p>
+                </div>
+            </div>
+
+            <!-- Projekt 5 -->
+            <div class="bg-white border-2 border-black rounded-lg overflow-hidden shadow-[6px_6px_0_#000]">
+                <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=800&q=80"
+                     alt="Knowledge Graph" onclick="openModal(this.src)"
+                     class="w-full h-48 object-cover cursor-pointer transition-transform duration-300 ease-in-out group-hover:scale-105" />
+                <div class="p-4">
+                    <h3 class="font-bold text-lg">Knowledge Graph</h3>
+                    <p class="text-sm text-slate-600">Mapa treści i relacji</p>
+                </div>
+            </div>
+
+            <!-- Projekt 6 -->
+            <div class="bg-white border-2 border-black rounded-lg overflow-hidden shadow-[6px_6px_0_#000]">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80"
+                     alt="Design Workshop" onclick="openModal(this.src)"
+                     class="w-full h-48 object-cover cursor-pointer transition-transform duration-300 ease-in-out group-hover:scale-105" />
+                <div class="p-4">
+                    <h3 class="font-bold text-lg">Design Workshop</h3>
+                    <p class="text-sm text-slate-600">Sesja projektowania partycypacyjnego</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- === MOJE MEDIA === -->
+<section id="social" class="py-24 px-6 bg-white border-t-4 border-black">
+    <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-black text-center mb-16 hover:rotate-6 transition-transform">
+            <span class="text-blue-600">@</span> Moje media
+        </h2>
+
+        <!-- Ikony społecznościowe -->
+        <div class="flex flex-wrap justify-center gap-6 mb-16">
+            <a href="#" class="text-white w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center shadow-[4px_4px_0_#000] hover:scale-110 transition"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="text-white w-12 h-12 rounded-full bg-blue-400 flex items-center justify-center shadow-[4px_4px_0_#000] hover:scale-110 transition"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-white w-12 h-12 rounded-full bg-pink-500 flex items-center justify-center shadow-[4px_4px_0_#000] hover:scale-110 transition"><i class="fab fa-dribbble"></i></a>
+            <a href="#" class="text-white w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center shadow-[4px_4px_0_#000] hover:scale-110 transition"><i class="fab fa-github"></i></a>
+            <a href="#" class="text-white w-12 h-12 rounded-full bg-red-600 flex items-center justify-center shadow-[4px_4px_0_#000] hover:scale-110 transition"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="text-white w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center shadow-[4px_4px_0_#000] hover:scale-110 transition"><i class="fab fa-medium"></i></a>
+        </div>
+
+        <!-- CTA do kontaktu -->
+        <div class="bg-white border-2 border-black p-6 rounded-xl shadow-[6px_6px_0_#000] transform transition-all duration-300 hover:scale-[1.03] hover:bg-pink-50 hover:shadow-[8px_8px_0_#000] text-center">
+            <h3 class="text-2xl font-bold mb-4">Współpracujmy 😄</h3>
+            <p class="mb-6 text-slate-700 max-w-2xl mx-auto">
+                Masz pytania, propozycję współpracy lub chcesz po prostu pogadać o UX/AI/technologiach?
+                Napisz do mnie – jestem otwarty na ciekawe rozmowy i wspólne projekty!
+            </p>
+            <a href="mailto:hello@example.com"
+               class="inline-block px-8 py-3 bg-pink-500 text-black rounded-full font-semibold shadow-[4px_4px_0_#000] hover:bg-pink-400 transition">
+                Skontaktuj się ze mną <i class="fas fa-paper-plane ml-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- === FOOTER === -->
+<footer class="py-12 px-6 bg-black text-white border-t-4 border-white">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-6 md:mb-0">
+            <h3 class="text-xl font-bold mb-1">Hubert Nastachowski</h3>
+            <p class="text-sm text-slate-400">Dzięki za odwiedzenie mojego cyfrowego świata 🌐</p>
+        </div>
+        <div class="text-center text-slate-500 text-sm mt-6 md:mt-0">
+            &copy; 2025. Wszelkie prawa zastrzeżone.
+        </div>
+    </div>
+</footer>
+
+<!-- === Modal dla powiększonych obrazów === -->
+<div id="imageModal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[999] hidden transition-opacity duration-300">
+    <div class="relative max-w-4xl w-full mx-4">
+        <button id="closeModal" class="absolute top-3 right-3 text-white text-2xl hover:text-blue-400 z-10">
+            <i class="fas fa-times"></i>
+        </button>
+        <img id="modalImage" src="" alt="Powiększony obraz" class="rounded-lg border-4 border-white shadow-[8px_8px_0_#000] mx-auto transition-transform duration-300 scale-95" />
+    </div>
+</div>
+
+<script>
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const closeBtn = document.getElementById('closeModal');
+
+    function openModal(src) {
+        modalImg.src = src;
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modalImg.classList.remove('scale-95');
+            modalImg.classList.add('scale-100');
+        }, 10);
+    }
+
+    closeBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+        modalImg.classList.remove('scale-100');
+        modalImg.classList.add('scale-95');
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.add('hidden');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+        }
+    });
+</script>
+
+
+</body>
+</html>
