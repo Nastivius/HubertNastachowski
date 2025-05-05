@@ -1,4 +1,4 @@
-# Portfolio Interaktywne – Makieta Frontendowa
+# Portfolio Interaktywne
 
 > **Wersja robocza interaktywnego portfolio** tworzonego przez [Hubert Nastachowskiego] jako koncept architektury informacji i demonstracja kreatywnej pracy z technologiami webowymi.
 
